@@ -27,7 +27,7 @@ binaryMessage = "".join(messageArray)
 print("Message:", binaryMessage)
 
 # Sets the file variable to the image the user has entered
-file = "FullSizeRender.jpg"
+file = "zelda.jpg"
 
 # Splits the file name from the extension so we can change it to png
 fileName, fileExt = os.path.splitext(file)
