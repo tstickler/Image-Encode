@@ -7,7 +7,7 @@ import math
 import argparse
 
 # User defined message to encrypt
-message = "Tyler"
+message = "Tyler Stickler"
 
 # Determines message length, zero fills it up to 33
 msgLength = len(message)
