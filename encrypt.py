@@ -1,4 +1,3 @@
-# Library for image modification
 from PIL import Image
 import os
 import math
@@ -14,10 +13,10 @@ import argparse
 # RGB value into binary, then modifies the least significant bit to   #
 # hide our data. This continues until the whole message is encoded.   #
 #                                                                     #
-# Function input: Image object                                        #
+# Function input: Image object, file name, file extension             #
 # Function returns: None                                              #
 #######################################################################
-def encode_message(im):
+def encode_message(im, file_name, file_extension):
     # User defined message to encrypt
     message = "Tyler Stickler"
 
@@ -109,6 +108,8 @@ def encode_message(im):
         if width_mod-1 == width:
             height_mod += 1
             width_mod = 1
+
+    # im.save("/Users/Tyler/Desktop/{}.png".format(file_name))
 
 
 #######################################################################
@@ -223,11 +224,11 @@ def main(argv):
     # Creates an image object to allow us to interact with the user's image
     im = Image.open(file)
 
-    encode_message(im)
+    encode_message(im, file_name, file_extension)
     print(decode_message(im))
 
-    # saves our image in png format
-    # im.save("{}.png".format(file_name))
+    im.show()
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])
