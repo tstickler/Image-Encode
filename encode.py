@@ -116,5 +116,3 @@ def encode_message(im, user_message, output_file):
     # Save our encoded file with the user specified name and png format
     im.save("{}.png".format(output_file))
 
-
-

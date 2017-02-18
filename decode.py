@@ -115,3 +115,4 @@ def decode_message(im):
     # Joins our list so it can be displayed as a string
     decoded_message = "".join(decoded_message)
     return decoded_message
+
