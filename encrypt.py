@@ -2,8 +2,6 @@ from PIL import Image
 import os
 import math
 import sys
-
-# Library for argument parsing
 import argparse
 
 
@@ -16,17 +14,22 @@ import argparse
 # Function input: Image object, file name, file extension             #
 # Function returns: None                                              #
 #######################################################################
-def encode_message(im, file_name, file_extension):
+def encode_message(im, file_name, file_extension, user_message, output_file):
     # User defined message to encrypt
-    message = "Tyler Stickler"
+    message = user_message
+
+    # Determines the width and height of the image
+    width, height = im.size
+    pixels_in_image = width * height
 
     # Determines message length, zero fills it up to 33
     msgLength = len(message)
     binaryMsgLength = bin(msgLength)[2:].zfill(33)
     pixels_needed = math.ceil((msgLength * 8) / 3)
-    print("Pixels Needed:", pixels_needed)
-    print("Message length:", msgLength)
-    print("Binary Message length:", binaryMsgLength)
+
+    if pixels_needed + 11 > pixels_in_image:
+        print("Sorry, your image is too small to hold this big of a message")
+        sys.exit()
 
     # Creates an array to hold binary values of the letters
     messageArray = []
@@ -36,10 +39,6 @@ def encode_message(im, file_name, file_extension):
         binaryVal = bin(ord(letter))[2:].zfill(8)
         messageArray.append(binaryVal)
     binaryMessage = "".join(messageArray)
-    print("Message:", binaryMessage)
-
-    # Determines the width and height of the image
-    width, height = im.size
 
     # The width and height modifiers are used to move us between pixels
     width_mod = 1
@@ -109,7 +108,7 @@ def encode_message(im, file_name, file_extension):
             height_mod += 1
             width_mod = 1
 
-    # im.save("/Users/Tyler/Desktop/{}.png".format(file_name))
+    im.save("{}.png".format(output_file))
 
 
 #######################################################################
@@ -153,6 +152,11 @@ def decode_message(im):
         # Move us to the next pixel in the row
         width_mod += 1
         times_to_loop -= 1
+
+        # If we hit the left side of the picture, move up a row
+        if width_mod - 1 == width:
+            height_mod += 1
+            width_mod = 1
 
     # Reverses order of the list so bits are in the correct position
     length.reverse()
@@ -199,6 +203,11 @@ def decode_message(im):
         width_mod += 1
         times_to_loop -= 1
 
+        # If we hit the left side of the picture, move up a row
+        if width_mod - 1 == width:
+            height_mod += 1
+            width_mod = 1
+
     # Bits are grouped joined into groups of 8, then turned into a
     # character based off of their ascii value.
     decoded_message = []
@@ -211,24 +220,54 @@ def decode_message(im):
     return decoded_message
 
 
-def main(argv):
-    for arg in argv:
-        print(arg)
+def main():
+    parser = argparse.ArgumentParser(description="Encode or decode an image")
+    parser.add_argument("-d", "--decode", help="file to decode")
+    parser.add_argument("-i", "--inFile", help="path to file to encode")
+    parser.add_argument("-e", "--encode", help="message to encode")
+    parser.add_argument("-o", "--outFile", help="name of new file")
+    args = parser.parse_args()
 
-    # Sets the file variable to the image the user has entered
-    file = "zelda.jpg"
+    # If/else statements to determine what the user would like to do.
+    # The first one prevents choosing encoding and decoding at the
+    # same time. The second uses an input file, a message, and
+    # the name of an ouptut file to execute. The third just needs
+    # a file to decode. Otherwise, our user has messed up and we exit.
+    if args.encode is not None and args.decode is not None:
+        print("You need to choose between encoding and decoding bro")
+        sys.exit()
+    elif args.encode is not None and \
+        args.inFile is not None and \
+            args.outFile is not None and \
+            args.decode is None:
+        # Sets the file variable to the image the user has entered
+        file = args.inFile
+        message = args.encode
+        output = args.outFile
 
-    # Splits the file name from the extension so we can change it to png
-    file_name, file_extension = os.path.splitext(file)
+        # Splits the file name from the extension so we can change it to png
+        file_name, file_extension = os.path.splitext(file)
 
-    # Creates an image object to allow us to interact with the user's image
-    im = Image.open(file)
+        # Creates an image object to allow us to interact with the user's image
+        im = Image.open(file)
 
-    encode_message(im, file_name, file_extension)
-    print(decode_message(im))
+        # Encodes the message and saves it
+        encode_message(im, file_name, file_extension, message, output)
+    elif args.decode is not None and \
+        args.encode is None and \
+            args.inFile is None and \
+            args.outFile is None:
+        # Sets the file variable to the image the user has entered
+        file = args.decode
 
-    im.show()
+        # Creates an image object to allow us to interact with the user's image
+        im = Image.open(file)
 
+        # Decodes the message and reports it to the user
+        print(decode_message(im))
+    else:
+        print("We're done here...")
+        sys.exit()
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()
