@@ -6,5 +6,5 @@ Program Execution: There are two options of execution, encoding and decoding. Ru
 
 	Encoding: python3 driver.py -i <path to image> -o <name of output file> -e <message>
 		Note: To encode source code, follow -e with "`<cat pathToFile1 pathToFile2...>`"
-			ex. -e "`<cat encode.py decode.py driver.py>`"
+			ex. -e "`cat encode.py decode.py driver.py`"
 	Decoding: python3 driver.py -d <path to image>
