@@ -104,6 +104,10 @@ def decode_message(im):
             height_mod += 1
             width_mod = 1
 
+        # If we ever the leave the image, stop trying to look for information
+        if width - width_mod == -1 or height - height_mod == -1:
+            break
+
     # Decoded bits are joined into groups of 8, then turned into a character
     # based off of their ascii value.
     decoded_message = []

@@ -28,10 +28,10 @@ def encode_message(im, user_message, output_file):
     # Determines message length, zero fills it up to 33
     message_length = len(message)
     binaryMsgLength = bin(message_length)[2:].zfill(33)
-    pixels_needed = math.ceil((message_length * 8) / 3)
+    pixels_needed = math.ceil((message_length * 8) / 3) + 11
 
     # Determines if their are enough pixels in the image to add the message
-    if pixels_needed + 11 > pixels_in_image:
+    if pixels_needed > pixels_in_image:
         print("Sorry, your image is too small to hold this big of a message.")
         sys.exit()
 
@@ -49,15 +49,12 @@ def encode_message(im, user_message, output_file):
     width_mod = 1
     height_mod = 1
 
-    # Determines how many times we need to loop
-    times_to_loop = pixels_needed + 11
-
     # Used as indexes
     length_counter = 32
     letter_counter = 0
 
     # Loop through and modify the pixels until task is complete
-    while times_to_loop > 0:
+    while pixels_needed > 0:
         # Gets the pixel's RGB values at the current XY coordinate
         r, g, b = im.getpixel((width-width_mod, height-height_mod))
 
@@ -83,7 +80,7 @@ def encode_message(im, user_message, output_file):
 
             im.putpixel((width - width_mod, height - height_mod),
                         (binary_red, binary_green, binary_blue))
-        elif times_to_loop > 0:
+        elif pixels_needed > 0:
             # Modify the RGB values to insert our message
             if letter_counter < message_length * 8:
                 binary_red[7] = binaryMessage[letter_counter]
@@ -106,13 +103,13 @@ def encode_message(im, user_message, output_file):
 
         # Move us to the next pixel in the row
         width_mod += 1
-        times_to_loop -= 1
+        pixels_needed -= 1
 
         # If we hit the left side of the picture, move up a row
         if width_mod-1 == width:
             height_mod += 1
             width_mod = 1
 
-    # Save our encoded file with the user specified name and png format
+    # Save our encoded file with the user specified name and .png format
     im.save("{}.png".format(output_file))
 
