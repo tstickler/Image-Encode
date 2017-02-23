@@ -9,6 +9,7 @@
 
 from PIL import Image
 import sys
+import os
 import argparse
 import decode
 import encode
@@ -40,6 +41,13 @@ def main():
         message = args.encode
         output = args.outFile
 
+        # Checks to make sure the user has entered a .jpg file to work with
+        file_extension = os.path.splitext(file)[1]
+        if file_extension != ".jpg":
+            print("Sorry, you've entered an invalid file type. Please provide"
+                  " a .jpg file to encode.")
+            sys.exit()
+
         # Creates an image object to allow interaction with the user's image
         im = Image.open(file)
 
@@ -63,4 +71,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
