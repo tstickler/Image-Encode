@@ -19,9 +19,9 @@ def main():
     # Creates a parser to allow us to handle command line arguments
     parser = argparse.ArgumentParser(description="Encode or decode an image")
     parser.add_argument("-d", "--decode", help="file to decode")
-    parser.add_argument("-i", "--inFile", help="path to file to encode")
+    parser.add_argument("-i", "--in_file", help="path to file to encode")
     parser.add_argument("-e", "--encode", help="message to encode")
-    parser.add_argument("-o", "--outFile", help="name of new file")
+    parser.add_argument("-o", "--out_file", help="name of new file")
     args = parser.parse_args()
 
     # If/else statements to determine what the user would like to do.
@@ -33,13 +33,13 @@ def main():
         print("You need to choose between encoding and decoding!")
         sys.exit()
     elif args.encode is not None and \
-        args.inFile is not None and \
-            args.outFile is not None and \
+        args.in_file is not None and \
+            args.out_file is not None and \
             args.decode is None:
         # Sets the file variable to the image the user has entered
-        file = args.inFile
+        file = args.in_file
         message = args.encode
-        output = args.outFile
+        output = args.out_file
 
         # Checks to make sure the user has entered a .jpg file to work with
         file_extension = os.path.splitext(file)[1]
@@ -55,8 +55,8 @@ def main():
         encode.encode_message(im, message, output)
     elif args.decode is not None and \
         args.encode is None and \
-            args.inFile is None and \
-            args.outFile is None:
+            args.in_file is None and \
+            args.out_file is None:
         # Sets the file variable to the image the user has entered
         file = args.decode
 
