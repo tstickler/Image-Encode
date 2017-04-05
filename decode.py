@@ -41,16 +41,18 @@ def decode_message(im):
         # Converts the RGB values to binary
         binary_red = list(bin(r)[2:].zfill(8))
         count += 1
+
         binary_green = list(bin(g)[2:].zfill(8))
         count += 1
-        if count != 32:
+
+        if count < 32:
             binary_blue = list(bin(b)[2:].zfill(8))
             count += 1
 
         # Adds the value to our list
         length.append(binary_red[7])
         length.append(binary_green[7])
-        if count != 32:
+        if count < 32:
             length.append(binary_blue[7])
 
         # Move us to the next pixel in the row
@@ -68,10 +70,10 @@ def decode_message(im):
     # Determine the number of pixels to look at for our message
     times_to_loop = math.ceil(num_of_bits_in_msg/3)
 
-    # Counter to determine if we have reached our max bits
+    # Counter to determine if we have reached our total bits
     counter = 0
 
-    # List to hold message bits
+    # Array to hold message bits
     bits_message = []
 
     # This while loop handles the contents of the message
@@ -113,14 +115,14 @@ def decode_message(im):
             width_mod = 1
 
         # If we ever the leave the image, stop trying to look for information
-        if width - width_mod == -1 or height - height_mod == -1:
+        if pixel_x == -1 or pixel_y == -1:
             break
 
     # Decoded bits are joined into groups of 8, turned into a character based
     # off of their ascii value, then added to the decoded message list
     decoded_message = []
     i = 0
-    while i != num_of_bits_in_msg:
+    while i < num_of_bits_in_msg:
         decoded_message.append((chr(int("".join(bits_message[i:i+8]), 2))))
         i += 8
 

@@ -51,7 +51,7 @@ def main():
         # Creates an image object to allow interaction with the user's image
         im = Image.open(file)
 
-        # Encodes the message and saves it
+        # Send information to function that encodes the message and saves it
         encode.encode_message(im, message, output)
     elif args.decode is not None and \
         args.encode is None and \

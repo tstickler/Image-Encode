@@ -25,21 +25,20 @@ def encode_message(im, user_message, output_file):
     width, height = im.size
     pixels_in_image = width * height
 
-    # Determines message length in bits, zero fills it up to 32
+    # Determines message length in bits, converts it to binary representation,
+    # and then zero fills it up to 32
     bit_size_message_length = len(message) * 8
     binary_msg_length = bin(bit_size_message_length)[2:].zfill(32)
-    pixels_needed = math.ceil(bit_size_message_length / 3) + 11
 
     # Determines if their are enough pixels in the image to add the message
+    pixels_needed = math.ceil(bit_size_message_length / 3) + 11
     if pixels_needed > pixels_in_image:
         print("Sorry, your image is too small to hold this big of a message.")
         sys.exit()
 
-    # Creates an array to hold binary values of the letters
-    message_array = []
-
     # Changes each letter to its binary representation, adds it to the message
     # array, and converts it into a string of 0s and 1s
+    message_array = []
     for letter in message:
         binary_value = bin(ord(letter))[2:].zfill(8)
         message_array.append(binary_value)
@@ -78,8 +77,8 @@ def encode_message(im, user_message, output_file):
             length_counter += 1
             binary_green = int("".join(binary_green), 2)
 
-            # Handles hitting the final blue value, shouldn't be modified
-            if length_counter == 32:
+            # Handles hitting the final blue value which shouldn't be modified
+            if length_counter >= 32:
                 binary_blue = b
             else:
                 binary_blue[7] = binary_msg_length[length_counter]
