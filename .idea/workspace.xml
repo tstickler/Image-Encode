@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9c4699e3-7f82-4d42-a007-cf93a53e642a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decode.py" afterPath="$PROJECT_DIR$/decode.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/driver.py" afterPath="$PROJECT_DIR$/driver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/encode.py" afterPath="$PROJECT_DIR$/encode.py" />
     </list>
     <ignored path="ImageEncrypt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -431,7 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491331278316</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Modified comments to be more clear&#10;Moved variables to flow better&#10;Added image with source code encoded">
+      <created>1491355790294</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1491355790294</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
@@ -445,9 +449,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15892857" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15892857" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901296" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.210199" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -493,7 +497,8 @@
     <MESSAGE value="fixed a typo in readme" />
     <MESSAGE value="added ability to check to see if the user entered the correct file type" />
     <MESSAGE value="Reworked logic to better meet project requirements&#10;Modified comments to be clearer&#10;Renamed variables to give them more meaning&#10;Removed unneeded code and arithmetic." />
-    <option name="LAST_COMMIT_MESSAGE" value="Reworked logic to better meet project requirements&#10;Modified comments to be clearer&#10;Renamed variables to give them more meaning&#10;Removed unneeded code and arithmetic." />
+    <MESSAGE value="Modified comments to be more clear&#10;Moved variables to flow better&#10;Added image with source code encoded" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified comments to be more clear&#10;Moved variables to flow better&#10;Added image with source code encoded" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
